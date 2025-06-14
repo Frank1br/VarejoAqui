@@ -9,6 +9,14 @@
         $todasCategorias = \App\Models\Category::all();
     @endphp
 
+    <form action="{{ route('produtos') }}" method="GET" class="mb-4">
+        <div class="input-group">
+            <input type="text" name="q" class="form-control" placeholder="Buscar produtos..." value="{{ $busca ?? '' }}">
+            <button class="btn btn-primary" type="submit">Buscar</button>
+        </div>
+    </form>
+
+
     <div class="mb-4">
         
         <h4 class="mb-2">Filtrar por categoria:</h4>

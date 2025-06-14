@@ -15,11 +15,23 @@ class HomeController extends Controller
         return view('home');
     }
 
-    public function produtos()
-    {
-        $produtos = Product::latest()->get();
-        return view('produtos', compact('produtos'));
+    public function produtos(Request $request)
+{
+    $busca = $request->input('q');
+
+    $query = Product::with('category')->latest();
+
+    if ($busca) {
+        $query->where(function ($q) use ($busca) {
+            $q->where('title', 'like', "%{$busca}%")
+              ->orWhere('description', 'like', "%{$busca}%");
+        });
     }
+
+    $produtos = $query->get();
+
+    return view('produtos', compact('produtos', 'busca'));
+}
 
     public function sobre()
     {
