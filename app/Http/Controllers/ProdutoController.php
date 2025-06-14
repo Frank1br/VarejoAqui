@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use App\Models\Product;
 use Illuminate\Support\Facades\Storage;
+use App\Models\Category;
 
 class ProdutoController extends Controller
 {
@@ -18,9 +19,10 @@ class ProdutoController extends Controller
     }
 
     public function create()
-    {
-        return view('produtos.create');
-    }
+{
+    $categorias = Category::all();
+    return view('produtos.create', compact('categorias'));
+}
 
     public function store(Request $request)
 {
@@ -29,9 +31,11 @@ class ProdutoController extends Controller
         'description' => 'required|string',
         'price'       => 'required|numeric',
         'image_path'  => 'nullable|image|max:2048',
+        'category_id' => 'required|exists:categories,id',
+
     ]);
 
-    $data = $request->only(['title', 'description', 'price']);
+    $data = $request->only(['title', 'description', 'price', 'category_id']);
     $data['user_id'] = auth()->id();
 
     if ($request->hasFile('image_path')) {
@@ -46,8 +50,10 @@ class ProdutoController extends Controller
 public function edit($id)
 {
     $produto = Product::where('user_id', auth()->id())->findOrFail($id);
-    return view('produtos.edit', compact('produto'));
+    $categorias = Category::all();
+    return view('produtos.edit', compact('produto', 'categorias'));
 }
+
 
 public function update(Request $request, $id)
 {
@@ -58,16 +64,19 @@ public function update(Request $request, $id)
         'description' => 'required|string',
         'price' => 'required|numeric',
         'image_path' => 'nullable|image|max:2048',
+        'category_id' => 'required|exists:categories,id',
+
     ]);
 
-    $data = $request->only(['title', 'description', 'price']);
+   $data = $request->only(['title', 'description', 'price', 'category_id']);
+
 
     if ($request->hasFile('image_path')) {
         $data['image_path'] = $request->file('image_path')->store('produtos', 'public');
     }
 
     $produto->update($data);
-
+    
     return redirect()->route('dashboard')->with('success', 'Produto atualizado com sucesso!');
 }
 

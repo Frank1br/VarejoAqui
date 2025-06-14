@@ -26,6 +26,17 @@
             <input type="file" name="image_path" class="form-control">
         </div>
 
+        <div class="mb-3">
+            <label class="form-label">Categoria</label>
+            <select name="category_id" class="form-select" required>
+                <option value="">Selecione uma categoria</option>
+                @foreach($categorias as $categoria)
+                    <option value="{{ $categoria->id }}">{{ $categoria->name }}</option>
+                @endforeach
+            </select>
+        </div>
+
+
         <button type="submit" class="btn btn-success">Salvar Produto</button>
     </form>
 @endsection

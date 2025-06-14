@@ -30,6 +30,19 @@
             @endif
         </div>
 
+        <div class="mb-3">
+            <label class="form-label">Categoria</label>
+            <select name="category_id" class="form-select" required>
+                <option value="">Selecione uma categoria</option>
+                @foreach($categorias as $categoria)
+                    <option value="{{ $categoria->id }}" {{ $produto->category_id == $categoria->id ? 'selected' : '' }}>
+                        {{ $categoria->name }}
+                    </option>
+                @endforeach
+            </select>
+        </div>
+
+
         <button type="submit" class="btn btn-success">Salvar Alterações</button>
     </form>
 @endsection
