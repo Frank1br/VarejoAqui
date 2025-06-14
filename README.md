@@ -107,7 +107,7 @@ Contribuições são bem-vindas! Para contribuir:
 
 ### 📞 Contato
 
-Caso queira entrar em contato, envie uma mensagem através da página Contato do sistema ou diretamente pelo email: seuemail@exemplo.com
+Caso queira entrar em contato, envie uma mensagem através da página Contato do sistema ou diretamente pelo email: frankoliveiradev@gmail.com
 
 ---
 
