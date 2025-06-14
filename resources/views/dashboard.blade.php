@@ -14,10 +14,21 @@
                         <img src="{{ asset('storage/' . $produto->image_path) }}" class="card-img-top" alt="{{ $produto->title }}">
                     @endif
                     <div class="card-body">
-                        <h5 class="card-title">{{ $produto->title }}</h5>
-                        <p class="card-text">{{ Str::limit($produto->description, 100) }}</p>
-                        <p class="fw-bold">R$ {{ number_format($produto->price, 2, ',', '.') }}</p>
-                    </div>
+    <h5 class="card-title">{{ $produto->title }}</h5>
+    <p class="card-text">{{ Str::limit($produto->description, 100) }}</p>
+    <p class="fw-bold">R$ {{ number_format($produto->price, 2, ',', '.') }}</p>
+
+    <div class="d-flex justify-content-between">
+        <a href="{{ route('produtos.edit', $produto->id) }}" class="btn btn-sm btn-warning">Editar</a>
+
+        <form action="{{ route('produtos.destroy', $produto->id) }}" method="POST" onsubmit="return confirm('Tem certeza que deseja excluir este produto?')">
+            @csrf
+            @method('DELETE')
+            <button class="btn btn-sm btn-danger">Excluir</button>
+        </form>
+    </div>
+</div>
+
                 </div>
             </div>
         @empty
