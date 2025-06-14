@@ -18,9 +18,11 @@ Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
+    Route::get('/produtos', [HomeController::class, 'produtos'])->name('produtos');
     Route::get('/produtos/create', [ProdutoController::class, 'create'])->name('produtos.create');
     Route::post('/produtos/store', [ProdutoController::class, 'store'])->name('produtos.store');
     Route::get('/produtos/{id}/edit', [ProdutoController::class, 'edit'])->name('produtos.edit');
+    Route::get('/produtos/categoria/{slug}', [HomeController::class, 'produtosPorCategoria'])->name('produtos.categoria');
     Route::put('/produtos/{id}', [ProdutoController::class, 'update'])->name('produtos.update');
     Route::delete('/produtos/{id}', [ProdutoController::class, 'destroy'])->name('produtos.destroy');
     Route::get('/mensagens', [MensagemController::class, 'index'])->name('mensagens.index');

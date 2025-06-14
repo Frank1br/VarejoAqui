@@ -2,10 +2,40 @@
 
 @section('content')
     <h2 class="mb-4">Produtos</h2>
+    
+
+
+    @php
+        $todasCategorias = \App\Models\Category::all();
+    @endphp
+
+    <div class="mb-4">
+        
+        <h4 class="mb-2">Filtrar por categoria:</h4>
+        <div class="d-flex flex-wrap gap-2">
+            @foreach($todasCategorias as $cat)
+                <a href="{{ route('produtos.categoria', $cat->slug) }}" class="btn btn-outline-secondary btn-sm {{ isset($categoria) && $categoria->id === $cat->id ? 'active' : '' }}">
+                    {{ $cat->name }}
+                </a>
+            @endforeach
+        </div>
+    </div>
+
+    <h2 class="mb-4">
+    Produtos {{ isset($categoria) ? 'em ' . $categoria->name : '' }}
+</h2>
 
     <div class="row">
         {{-- Loop para exibir os produtos --}}
         @forelse($produtos as $produto)
+        
+         @if($produto->category)
+            <p class="text-muted mb-1">
+                <small>Categoria: {{ $produto->category->name }}</small>
+            </p>
+        @endif
+
+
             <div class="col-md-4 mb-4">
                 <div class="card h-100">
                     @if($produto->image_path)

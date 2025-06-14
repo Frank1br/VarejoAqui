@@ -12,6 +12,12 @@
                 <div class="card h-100">
                     @if($produto->image_path)
                         <img src="{{ asset('storage/' . $produto->image_path) }}" class="card-img-top" alt="{{ $produto->title }}">
+                        @if($produto->category)
+    <p class="text-muted mb-0">
+        <small>Categoria: {{ $produto->category->name }}</small>
+    </p>
+@endif
+
                     @endif
                     <div class="card-body">
     <h5 class="card-title">{{ $produto->title }}</h5>

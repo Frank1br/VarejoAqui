@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\Product;
 use App\Models\Contact;
+use App\Models\Category;
+
 
 class HomeController extends Controller
 {
@@ -42,4 +44,15 @@ class HomeController extends Controller
 
         return redirect()->back()->with('success', 'Mensagem enviada com sucesso!');
     }
+
+    public function produtosPorCategoria($slug)
+{
+    $categoria = Category::where('slug', $slug)->firstOrFail();
+    $produtos = Product::with('category')
+        ->where('category_id', $categoria->id)
+        ->latest()
+        ->get();
+
+    return view('produtos', compact('produtos', 'categoria'));
+}
 }
