@@ -56,6 +56,11 @@
                     </div>
                 </div>
             </div>
+
+            <div class="mt-4">
+                 {{ $produtos->links() }}
+            </div>
+
         @empty
             <p class="text-muted">Nenhum produto encontrado.</p>
         @endforelse

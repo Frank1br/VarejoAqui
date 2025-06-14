@@ -28,7 +28,8 @@ class HomeController extends Controller
         });
     }
 
-    $produtos = $query->get();
+    $produtos = $query->paginate(9)->withQueryString();
+
 
     return view('produtos', compact('produtos', 'busca'));
 }
@@ -61,9 +62,11 @@ class HomeController extends Controller
 {
     $categoria = Category::where('slug', $slug)->firstOrFail();
     $produtos = Product::with('category')
-        ->where('category_id', $categoria->id)
-        ->latest()
-        ->get();
+    ->where('category_id', $categoria->id)
+    ->latest()
+    ->paginate(9)
+    ->withQueryString();
+
 
     return view('produtos', compact('produtos', 'categoria'));
 }
