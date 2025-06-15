@@ -5,6 +5,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\ProdutoController;
 use App\Http\Controllers\MensagemController;
  use App\Http\Controllers\HomeController;
+ use App\Http\Controllers\FavoritoController;
 Route::get('/', function () {
     return view('welcome');
 });
@@ -29,6 +30,9 @@ Route::middleware('auth')->group(function () {
     Route::delete('/mensagens/{id}', [MensagemController::class, 'destroy'])->name('mensagens.destroy');
     Route::get('/contato', [HomeController::class, 'contato'])->name('contato');
     Route::post('/contato', [HomeController::class, 'enviarContato'])->name('contato.enviar');
+    Route::post('/produtos/{id}/favoritar', [FavoritoController::class, 'store'])->name('favoritos.store');
+    Route::delete('/produtos/{id}/desfavoritar', [FavoritoController::class, 'destroy'])->name('favoritos.destroy');
+    Route::get('/favoritos', [FavoritoController::class, 'index'])->name('favoritos.index');
 
 
 });
