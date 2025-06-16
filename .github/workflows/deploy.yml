@@ -3,7 +3,7 @@ name: Deploy to GitHub Pages
 on:
   push:
     branches:
-      - main  # dispara o deploy quando fizer push na branch main
+      - main  # Rodar quando fizer push na branch main
 
 permissions:
   contents: write
@@ -15,26 +15,26 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      - name: Checkout repository
+      - name: Fazer checkout do código
         uses: actions/checkout@v3
 
-      - name: Set up Node.js
+      - name: Configurar Node.js
         uses: actions/setup-node@v3
         with:
           node-version: '20'
 
-      - name: Install dependencies
+      - name: Instalar dependências e buildar o projeto
         run: |
           npm install
           npm run build
 
-      - name: Deploy to GitHub Pages
+      - name: Configurar GitHub Pages
         uses: actions/configure-pages@v3
 
-      - name: Upload build artifacts
+      - name: Upload dos arquivos de build
         uses: actions/upload-pages-artifact@v1
         with:
-          path: './public/build'  # pasta onde o build é gerado
+          path: './public/build'  # Caminho do build do Laravel+Vite
 
-      - name: Deploy to GitHub Pages
+      - name: Fazer deploy para GitHub Pages
         uses: actions/deploy-pages@v1
