@@ -44,6 +44,17 @@
         font-size: 0.85rem;
         color: #6c757d;
     }
+
+    @keyframes pulse {
+    0% { transform: scale(1); opacity: 0.8; }
+    50% { transform: scale(1.2); opacity: 1; }
+    100% { transform: scale(1); opacity: 0.8; }
+}
+
+.badge.bg-danger {
+    animation: pulse 1.5s infinite;
+}
+
 </style>
 
 
@@ -66,9 +77,32 @@
                         <li class="nav-item"><a class="nav-link" href="{{ route('favoritos.index') }}">Favoritos ❤️</a></li>
                         <li class="nav-item"><a class="nav-link" href="{{ route('carrinho.index') }}">Carrinho 🛒</a></li>
                         <li class="nav-item"><a class="nav-link" href="{{ route('pedidos.index') }}">Meus Pedidos 🧾</a></li>
-                        <li class="nav-item"><a class="nav-link" href="{{ route('mensagens.index') }}">Mensagens 📬</a></li>
                         <li class="nav-item"><a class="nav-link" href="{{ route('sobre') }}">Sobre</a></li>
+                        @php
+                    $mensagensNaoLidas = \App\Models\Contact::where('is_read', false)->count();
+                        @endphp
 
+                        <li class="nav-item position-relative">
+                            <a class="nav-link" href="{{ route('mensagens.index') }}">
+                                 Mensagem 📬
+                                @if($mensagensNaoLidas > 0)
+                                    <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger">
+                                        {{ $mensagensNaoLidas }}
+                                    </span>
+                                @endif
+                            </a>
+                        </li>
+
+                        <li class="nav-item position-relative">
+                            <a class="nav-link" href="{{ route('contato') }}">
+                                Enviar Mensagem 📨
+                                @if($mensagensNaoLidas > 0)
+                                    <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger">
+                                        {{ $mensagensNaoLidas }}
+                                    </span>
+                                @endif
+                            </a>
+                        </li>
                     @auth
                         <li class="nav-item dropdown">
                             <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown">
@@ -94,7 +128,10 @@
                 </ul>
             </div>
         </div>
+        
     </nav>
+
+    
 
 
     <!-- Conteúdo -->

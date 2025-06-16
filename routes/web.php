@@ -48,6 +48,13 @@ Route::middleware('auth')->group(function () {
     Route::get('/sobre', function () {
     return view('sobre');
     })->name('sobre');
+    Route::get('/contato', [MensagemController::class, 'index'])->name('contato');
+    // Mostrar mensagens recebidas
+    Route::get('/mensagens', [MensagemController::class, 'index'])->name('mensagens.index');
+
+// Formulário de contato
+    Route::get('/contato', [HomeController::class, 'contato'])->name('contato');
+    Route::post('/contato', [HomeController::class, 'enviarContato'])->name('contato.enviar');
 
 
 });

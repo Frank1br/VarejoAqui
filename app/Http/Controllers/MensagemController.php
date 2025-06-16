@@ -8,10 +8,17 @@ use App\Models\Contact;
 class MensagemController extends Controller
 {
     public function index()
-    {
-        $mensagens = Contact::latest()->paginate(10);
-        return view('mensagens.index', compact('mensagens'));
-    }
+{
+    // Marcar todas as mensagens como lidas
+    Contact::where('is_read', false)->update(['is_read' => true]);
+
+    // Buscar todas as mensagens
+    $mensagens = Contact::latest()->paginate(10); // Agora retorna um objeto paginado
+
+
+    return view('mensagens.index', compact('mensagens'));
+
+}
 
     public function destroy($id)
     {
