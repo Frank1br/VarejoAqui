@@ -7,6 +7,7 @@ use App\Http\Controllers\MensagemController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\FavoritoController;
 use App\Http\Controllers\CarrinhoController;
+use App\Http\Controllers\CheckoutController;
 
 Route::get('/', function () {
     return view('welcome');
@@ -38,8 +39,9 @@ Route::middleware('auth')->group(function () {
     Route::post('/carrinho/adicionar/{id}', [CarrinhoController::class, 'store'])->name('carrinho.store');
     Route::get('/carrinho', [CarrinhoController::class, 'index'])->name('carrinho.index');
     Route::delete('/carrinho/remover/{id}', [CarrinhoController::class, 'destroy'])->name('carrinho.destroy');
-
-
+    Route::patch('/carrinho/atualizar/{id}', [CarrinhoController::class, 'update'])->name('carrinho.update');
+    Route::middleware('auth')->post('/checkout', [CheckoutController::class, 'store'])->name('checkout.store');
+    Route::post('/checkout', [CheckoutController::class, 'store'])->name('checkout.store');
 });
 
 require __DIR__.'/auth.php';

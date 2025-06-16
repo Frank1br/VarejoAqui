@@ -57,9 +57,9 @@ class User extends Authenticatable
     }
 
     public function carrinho()
-    {
-        return $this->belongsToMany(Product::class, 'carts')->withPivot('quantity')->withTimestamps();
-    }
+{
+    return $this->belongsToMany(Product::class, 'carts')->withPivot('quantity')->withTimestamps();
+}
 
 
 }
