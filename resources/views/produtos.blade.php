@@ -32,6 +32,9 @@
 
     <div class="row">
         @forelse($produtos as $produto)
+
+        
+
             <div class="col-md-4 mb-4 d-flex">
                 <div class="card w-100 h-100 d-flex flex-column shadow-sm border-0 transition-card">
                     @if($produto->image_path)
@@ -106,7 +109,14 @@
                         <button class="btn btn-outline-primary">Favoritar 🤍</button>
                     @endif
                 </form>
+
+                {{-- Botão carrinho --}}
+                <form action="{{ route('carrinho.store', $produto->id) }}" method="POST" class="mt-2">
+                    @csrf
+                    <button class="btn btn-success">Adicionar ao Carrinho 🛒</button>
+                </form>
             @endauth
+
         </div>
       </div>
       <div class="modal-footer">

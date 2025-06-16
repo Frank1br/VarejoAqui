@@ -4,8 +4,10 @@ use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\ProdutoController;
 use App\Http\Controllers\MensagemController;
- use App\Http\Controllers\HomeController;
- use App\Http\Controllers\FavoritoController;
+use App\Http\Controllers\HomeController;
+use App\Http\Controllers\FavoritoController;
+use App\Http\Controllers\CarrinhoController;
+
 Route::get('/', function () {
     return view('welcome');
 });
@@ -33,6 +35,9 @@ Route::middleware('auth')->group(function () {
     Route::post('/produtos/{id}/favoritar', [FavoritoController::class, 'store'])->name('favoritos.store');
     Route::delete('/produtos/{id}/desfavoritar', [FavoritoController::class, 'destroy'])->name('favoritos.destroy');
     Route::get('/favoritos', [FavoritoController::class, 'index'])->name('favoritos.index');
+    Route::post('/carrinho/adicionar/{id}', [CarrinhoController::class, 'store'])->name('carrinho.store');
+    Route::get('/carrinho', [CarrinhoController::class, 'index'])->name('carrinho.index');
+    Route::delete('/carrinho/remover/{id}', [CarrinhoController::class, 'destroy'])->name('carrinho.destroy');
 
 
 });
