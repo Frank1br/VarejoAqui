@@ -15,7 +15,6 @@
 - 📬 Sistema de mensagens com visualização e badge de novas mensagens
 - 🔐 Autenticação de usuários com login/registro
 - 📱 Interface responsiva com Bootstrap 5
-- 🌙 Suporte a modo escuro automático
 
 ---
 
@@ -96,15 +95,7 @@ php artisan storage:link
 
 ---
 
-## ✅ Deploy
 
-O projeto pode ser facilmente implantado no:
-
-- **Render.com** (recomendado gratuito)
-- **Laravel Forge + VPS**
-- **cPanel** (tradicional)
-
----
 
 ## 👨‍🎓 Autor
 
@@ -112,8 +103,8 @@ O projeto pode ser facilmente implantado no:
 Estudante de Engenharia da Computação & Desenvolvimento de Software  
 GitHub: [github.com/Frank1br](https://github.com/Frank1br)
 
----
+**Nicolas Da Silva**  
+Estudante de Desenvolvimento de Software  
+GitHub: [github.com/ncdsrNicolas](https://github.com/ncdsrNicolas)
 
-## 📄 Licença
 
-Este projeto está licenciado sob a **MIT License** — sinta-se livre para usar, adaptar ou contribuir!
