@@ -1,116 +1,119 @@
+# 🛍️ VarejoAqui
 
-# Vajero Aqui
-
-## 🚀 Plataforma de Microempreendedores Locais
-
-### 💡 Sobre o Projeto
-
-VarejoAqui é uma plataforma web que conecta microempreendedores locais (artesãos, confeiteiros, costureiras, entre outros) a clientes da sua própria cidade. Através do sistema, os empreendedores podem criar contas, cadastrar seus produtos, gerenciar suas vendas e receber mensagens de clientes interessados, facilitando a divulgação e comercialização online de forma acessível e simples.
+**VarejoAqui** é uma plataforma web desenvolvida com Laravel, focada em conectar microempreendedores locais com consumidores. O objetivo é facilitar a venda e compra de produtos de forma acessível, rápida e funcional.
 
 ---
 
-### 🎯 Problema que Resolve
+## 🚀 Funcionalidades
 
-Muitos microempreendedores enfrentam dificuldade para divulgar e vender seus produtos pela internet, seja por falta de conhecimento técnico, recursos financeiros ou acesso a plataformas de vendas locais.
-
----
-
-### 💼 Solução
-
-VarejoAqui oferece uma solução integrada para cadastro, gerenciamento e exposição dos produtos, além de um canal direto de comunicação entre clientes e vendedores. O sistema também possui uma área administrativa para gestão dos usuários, contatos e produtos.
-
----
-
-### 📌 Funcionalidades
-
-#### Área Pública
-
-- Página Home com missão do projeto e destaques para empreendedores em alta e categorias.
-- Página Sobre com informações do projeto e equipe.
-- Página Produtos com listagem e filtros por categoria.
-- Página Contato com formulário para mensagens (salvas no banco).
-
-#### Área Autenticada (Empreendedores)
-
-- Dashboard personalizado para cada usuário.
-- Cadastro de produtos com upload de imagem, descrição e preço.
-- Listagem dos próprios produtos com opções de editar e excluir.
-- Visualização das mensagens recebidas dos clientes.
-
-#### Área Administrativa (opcional)
-
-- Visualização geral de usuários e gerenciamento.
-- Moderação de mensagens.
-- Banimento de usuários ou destaque de produtos.
+- 🛒 Catálogo de produtos com imagens e categorias
+- ❤️ Sistema de favoritos (usuário pode favoritar produtos)
+- 🔎 Filtro por categorias e busca por palavra-chave
+- 📥 Carrinho de compras com quantidade e valor total
+- ✅ Finalização de pedidos (checkout) e armazenamento de histórico
+- 🧾 Página de **Meus Pedidos**
+- 📬 Sistema de mensagens com visualização e badge de novas mensagens
+- 🔐 Autenticação de usuários com login/registro
+- 📱 Interface responsiva com Bootstrap 5
+- 🌙 Suporte a modo escuro automático
 
 ---
 
-### 🛠 Tecnologias Utilizadas
+## 🧑‍💻 Tecnologias Utilizadas
 
-- Backend: Laravel PHP Framework
-- Banco de Dados: MySQL
-- Frontend: Blade Templates com Bootstrap/Tailwind CSS
-- Autenticação: Laravel Breeze / Laravel UI
-- Controle de Versão: Git e GitHub
+- Laravel 10+
+- PHP 8.1+
+- Bootstrap 5
+- MySQL
+- Blade Templates
+- SweetAlert2 (para feedbacks visuais)
+- Eloquent ORM
 
 ---
 
-### 📁 Estrutura do Projeto
+## 📦 Instalação Local
 
+### 1. Clone o repositório
+
+```bash
+git clone https://github.com/seu-usuario/varejoaqui.git
+cd varejoaqui
 ```
-resources/views/
-├── layouts/
-│   └── app.blade.php           # Template base com navbar
-├── home.blade.php              # Página inicial
-├── about.blade.php             # Página sobre
-├── contact.blade.php           # Página contato
-├── products.blade.php          # Listagem pública de produtos
-└── dashboard/
-    ├── index.blade.php        # Dashboard do usuário
-    ├── create_product.blade.php # Formulário cadastro produto
-    └── my_products.blade.php  # Listagem de produtos do usuário
+
+### 2. Instale as dependências
+
+```bash
+composer install
+npm install && npm run dev # se usar Vite
+```
+
+### 3. Configure o `.env`
+
+Crie um arquivo `.env` com base no `.env.example` e configure seu banco de dados local:
+
+```bash
+cp .env.example .env
+php artisan key:generate
+```
+
+### 4. Rode as migrations
+
+```bash
+php artisan migrate
+```
+
+### 5. Inicie o servidor local
+
+```bash
+php artisan serve
 ```
 
 ---
 
-### 📦 Migrações e Models Principais
+## 🌐 Página Inicial
 
-- Tabela `users`: Cadastro e autenticação de usuários.
-- Tabela `products`: Produtos cadastrados pelos usuários.
-- Tabela `categories`: Categorias para classificação de produtos.
-- Tabela `contacts`: Mensagens enviadas via formulário de contato.
+A aplicação já inclui uma **landing page** moderna e responsiva, acessível em `/`, com informações sobre o projeto e navegação para produtos.
 
 ---
 
-### 🔧 Próximos Passos / Escalabilidade
+## 📬 Mensagens
 
-- Implementar sistema de busca e filtros por localização.
-- Adicionar sistema de avaliações e comentários.
-- Criar painel de analytics simples para empreendedores.
-- Permitir funcionalidade para favoritar produtos.
-- Integrar sistema de pagamentos (ex: Stripe, PagSeguro).
-- Adicionar responsividade aprimorada e animações.
-
----
-
-### 🤝 Como Contribuir
-
-Contribuições são bem-vindas! Para contribuir:
-
-1. Faça um fork do projeto.
-2. Crie uma branch com a feature: `git checkout -b feature/nome-da-feature`
-3. Faça commit das suas alterações: `git commit -m 'Add nova feature'`
-4. Push para a branch: `git push origin feature/nome-da-feature`
-5. Abra um Pull Request.
+O sistema de contato está integrado à tabela `contacts` e permite:
+- Envio de mensagens rápidas
+- Visualização no painel `/contato`
+- Marcação automática de mensagens como lidas
+- Contador de mensagens não lidas com badge na navbar
 
 ---
 
-### 📞 Contato
+## 📷 Imagens
 
-Caso queira entrar em contato, envie uma mensagem através da página Contato do sistema ou diretamente pelo email: frankoliveiradev@gmail.com
+As imagens dos produtos são armazenadas via sistema de upload com `Storage::disk('public')`. Certifique-se de rodar:
+
+```bash
+php artisan storage:link
+```
 
 ---
 
-### 📄 Licença
+## ✅ Deploy
 
-Este projeto está licenciado sob a MIT License - veja o arquivo [LICENSE](LICENSE) para detalhes.
+O projeto pode ser facilmente implantado no:
+
+- **Render.com** (recomendado gratuito)
+- **Laravel Forge + VPS**
+- **cPanel** (tradicional)
+
+---
+
+## 👨‍🎓 Autor
+
+**Frank Oliveira**  
+Estudante de Engenharia da Computação & Desenvolvimento de Software  
+GitHub: [github.com/Frank1br](https://github.com/Frank1br)
+
+---
+
+## 📄 Licença
+
+Este projeto está licenciado sob a **MIT License** — sinta-se livre para usar, adaptar ou contribuir!
