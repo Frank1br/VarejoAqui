@@ -1,6 +1,7 @@
 @extends('layouts.main')
 
 @section('content')
+<br><br>
     <h2>Mensagens Recebidas</h2>
 
     @if(session('success'))

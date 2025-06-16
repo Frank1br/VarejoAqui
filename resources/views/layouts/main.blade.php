@@ -4,6 +4,8 @@
     <meta charset="UTF-8">
     <title>VarejoAqui</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
 
     <!-- Bootstrap CDN -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
@@ -11,58 +13,129 @@
     @stack('styles')
 
     <style>
+    body {
+        background-color: #f8f9fa;
+        font-family: 'Segoe UI', sans-serif;
+    }
+
     .transition-card {
         transition: transform 0.2s ease, box-shadow 0.2s ease;
     }
 
     .transition-card:hover {
         transform: translateY(-5px);
-        box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
+        box-shadow: 0 10px 25px rgba(0, 0, 0, 0.08);
+    }
+
+    .navbar-brand span {
+        font-weight: bold;
+        color: #0d6efd;
+    }
+
+    .btn {
+        transition: 0.2s;
+    }
+
+    .btn:hover {
+        opacity: 0.9;
+    }
+
+    footer {
+        font-size: 0.85rem;
+        color: #6c757d;
     }
 </style>
+
 
 </head>
 <body>
     <!-- Navbar -->
-    <nav class="navbar navbar-expand-lg navbar-dark bg-dark sticky-top">
+   <nav class="navbar navbar-expand-lg navbar-light bg-white shadow-sm fixed-top">
         <div class="container">
-            <a class="navbar-brand" href="{{ url('/') }}">VarejoAqui</a>
-            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+            <a class="navbar-brand" href="{{ url('/') }}">
+                <span>VarejoAqui</span>
+            </a>
+
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarContent">
                 <span class="navbar-toggler-icon"></span>
             </button>
-    
-            <div class="collapse navbar-collapse" id="navbarNav">
-                <ul class="navbar-nav me-auto">
-                    <li class="nav-item"><a class="nav-link" href="{{ url('/') }}">Home</a></li>
-                    <li class="nav-item"><a class="nav-link" href="{{ url('/produtos') }}">Produtos</a></li>
-                    <li class="nav-item"><a class="nav-link" href="{{ url('/sobre') }}">Sobre</a></li>
-                    <li class="nav-item"><a class="nav-link" href="{{ url('/contato') }}">Contato</a></li>
-                </ul>
-                <ul class="navbar-nav ms-auto">
+
+            <div class="collapse navbar-collapse" id="navbarContent">
+                <ul class="navbar-nav ms-auto gap-2">
+                        <li class="nav-item"><a class="nav-link" href="{{ route('produtos') }}">Produtos</a></li>
+                        <li class="nav-item"><a class="nav-link" href="{{ route('favoritos.index') }}">Favoritos ❤️</a></li>
+                        <li class="nav-item"><a class="nav-link" href="{{ route('carrinho.index') }}">Carrinho 🛒</a></li>
+                        <li class="nav-item"><a class="nav-link" href="{{ route('pedidos.index') }}">Meus Pedidos 🧾</a></li>
+                        <li class="nav-item"><a class="nav-link" href="{{ route('mensagens.index') }}">Mensagens 📬</a></li>
+                        <li class="nav-item"><a class="nav-link" href="{{ route('sobre') }}">Sobre</a></li>
+
                     @auth
                         <li class="nav-item dropdown">
-                            <a class="nav-link dropdown-toggle" href="#" data-bs-toggle="dropdown">{{ Auth::user()->name }}</a>
+                            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown">
+                                {{ Auth::user()->name }}
+                            </a>
                             <ul class="dropdown-menu dropdown-menu-end">
-                                <li><a class="dropdown-item" href="{{ url('/dashboard') }}">Dashboard</a></li>
+                                <li><a class="dropdown-item" href="{{ route('dashboard') }}">Dashboard</a></li>
+                                <li><hr class="dropdown-divider"></li>
                                 <li>
-                                    <form action="{{ route('logout') }}" method="POST">
+                                    <form action="{{ route('logout') }}" method="POST" class="d-inline">
                                         @csrf
-                                        <button class="dropdown-item" type="submit">Sair</button>
+                                        <button class="dropdown-item">Sair</button>
                                     </form>
                                 </li>
                             </ul>
                         </li>
-                    @else
-                        <li class="nav-item"><a class="nav-link" href="{{ route('login') }}">Entrar</a></li>
                     @endauth
+
+                    @guest
+                        <li class="nav-item"><a class="nav-link" href="{{ route('login') }}">Entrar</a></li>
+                        <li class="nav-item"><a class="nav-link" href="{{ route('register') }}">Registrar</a></li>
+                    @endguest
                 </ul>
             </div>
         </div>
     </nav>
 
+
     <!-- Conteúdo -->
     <main class="py-4">
         <div class="container">
+            @if(session('success'))
+<script>
+    Swal.fire({
+        icon: 'success',
+        title: 'Sucesso!',
+        text: '{{ session('success') }}',
+        timer: 3000,
+        showConfirmButton: false
+    });
+</script>
+@endif
+
+@if(session('error'))
+<script>
+    Swal.fire({
+        icon: 'error',
+        title: 'Erro',
+        text: '{{ session('error') }}',
+        timer: 4000,
+        showConfirmButton: false
+    });
+</script>
+@endif
+
+@if(session('warning'))
+<script>
+    Swal.fire({
+        icon: 'warning',
+        title: 'Atenção',
+        text: '{{ session('warning') }}',
+        timer: 4000,
+        showConfirmButton: false
+    });
+</script>
+@endif
+
             @yield('content')
         </div>
     </main>

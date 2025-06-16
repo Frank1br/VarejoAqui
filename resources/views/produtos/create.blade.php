@@ -1,6 +1,7 @@
 @extends('layouts.main')
 
 @section('content')
+<br><br>
     <h2>Cadastrar Novo Produto</h2>
 
     <form action="{{ route('produtos.store') }}" method="POST" enctype="multipart/form-data">

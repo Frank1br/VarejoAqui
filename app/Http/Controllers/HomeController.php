@@ -67,6 +67,8 @@ class HomeController extends Controller
     ->paginate(9)
     ->withQueryString();
 
+    //return redirect()->route('dashboard')->with('success', 'Bem-vindo de volta, ' . auth()->user()->name . '!');
+
 
     return view('produtos', compact('produtos', 'categoria'));
 }

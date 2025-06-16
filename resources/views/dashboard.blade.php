@@ -1,8 +1,15 @@
 @extends('layouts.main')
+@if(session('success'))
+    <div class="alert alert-success">
+        {{ session('success') }}
+    </div>
+@endif
 
 @section('content')
+<br><br>
     <div class="d-flex justify-content-between align-items-center mb-3">
         <h2>Meus Produtos</h2>
+        
         <a href="{{ route('produtos.create') }}" class="btn btn-primary">Novo Produto</a>
     </div>
 

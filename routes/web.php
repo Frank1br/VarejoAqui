@@ -18,6 +18,8 @@ Route::middleware(['auth'])->group(function () {
 });
 
 
+
+
 Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
@@ -42,6 +44,12 @@ Route::middleware('auth')->group(function () {
     Route::patch('/carrinho/atualizar/{id}', [CarrinhoController::class, 'update'])->name('carrinho.update');
     Route::middleware('auth')->post('/checkout', [CheckoutController::class, 'store'])->name('checkout.store');
     Route::post('/checkout', [CheckoutController::class, 'store'])->name('checkout.store');
+    Route::get('/meus-pedidos', [\App\Http\Controllers\PedidoController::class, 'index'])->name('pedidos.index');
+    Route::get('/sobre', function () {
+    return view('sobre');
+    })->name('sobre');
+
+
 });
 
 require __DIR__.'/auth.php';

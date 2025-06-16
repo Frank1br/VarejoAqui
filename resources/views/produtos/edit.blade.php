@@ -1,6 +1,7 @@
 @extends('layouts.main')
 
 @section('content')
+<br><br>
     <h2>Editar Produto</h2>
 
     <form action="{{ route('produtos.update', $produto->id) }}" method="POST" enctype="multipart/form-data">

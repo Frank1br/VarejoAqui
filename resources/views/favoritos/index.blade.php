@@ -11,6 +11,7 @@
 </style>
 
 @section('content')
+<br><br>
     <h2>Meus Favoritos</h2>
 
     <div class="row">

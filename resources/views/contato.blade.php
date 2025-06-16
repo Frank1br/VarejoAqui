@@ -1,6 +1,7 @@
 @extends('layouts.main')
 
 @section('content')
+<br><br>
     <h2>Fale conosco</h2>
 
     @if(session('success'))
